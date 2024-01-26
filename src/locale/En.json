@@ -1,3 +1,5 @@
 {
-    "TEST":"test"
+    "TEST":"test",
+    "LOGIN":"Login",
+    "REGISTER":"Register"
 }
