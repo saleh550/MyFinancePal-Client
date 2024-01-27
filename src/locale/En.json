@@ -1,5 +1,10 @@
 {
     "TEST":"test",
     "LOGIN":"Login",
-    "REGISTER":"Register"
+    "REGISTER":"Register",
+    "LOGINING":"Login",
+    "FULLNAME":"Full Name",
+    "USERNAME":"User Name",
+    "PASSWORD":"Password",
+    "COMFORT_PASSWORD":"Comfort Password"
 }

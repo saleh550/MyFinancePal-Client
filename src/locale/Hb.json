@@ -1,5 +1,10 @@
 {
     "TEST":"בדיקה",
     "LOGIN":"התחבר",
-    "REGISTER":"הרשמה"
+    "REGISTER":"הרשמה",
+    "LOGINING":"התחברות",
+    "FULLNAME":"שם מלא",
+    "USERNAME":"שם משתמש",
+    "PASSWORD":"סיסמה",
+    "COMFORT_PASSWORD":"סיסמה מאובטחת"
 }
