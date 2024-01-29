@@ -1,7 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../features/auth/authSlice";
 
 function Login() {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
     userName: "",
@@ -19,7 +22,8 @@ function Login() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData)
+    dispatch(login(formData))
+    // console.log(formData);
   };
   return (
     <>

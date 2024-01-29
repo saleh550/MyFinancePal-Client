@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-
+import { useSelector, useDispatch } from "react-redux";
+import { register } from "../features/auth/authSlice";
 function Register() {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
-  const [ formData, setFormData ] = useState({
+  const [formData, setFormData] = useState({
     fullName: "",
     userName: "",
     password: "",
@@ -18,11 +20,10 @@ function Register() {
         [e.target.name]: e.target.value,
       };
     });
-
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    dispatch(register(formData));
   };
   return (
     <>
