@@ -6,5 +6,6 @@
     "FULLNAME":"Full Name",
     "USERNAME":"User Name",
     "PASSWORD":"Password",
-    "COMFORT_PASSWORD":"Comfort Password"
+    "COMFORT_PASSWORD":"Comfort Password",
+    "LOGOUT":"Logout"
 }

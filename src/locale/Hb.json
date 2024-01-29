@@ -6,5 +6,7 @@
     "FULLNAME":"שם מלא",
     "USERNAME":"שם משתמש",
     "PASSWORD":"סיסמה",
-    "COMFORT_PASSWORD":"סיסמה מאובטחת"
+    "COMFORT_PASSWORD":"סיסמה מאובטחת",
+    "LOGOUT":"התנתק"
+
 }

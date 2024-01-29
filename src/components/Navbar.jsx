@@ -1,14 +1,20 @@
 import { useTranslation } from "react-i18next";
 import { MdLanguage } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../features/auth/authSlice";
 
 function Navbar() {
-  const { t ,i18n} = useTranslation();
+  const { user } = useSelector((state) => state.auth);
+  const { t, i18n } = useTranslation();
+  const dispatch =useDispatch();
   return (
     <>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <Link to='/' class="navbar-brand text-danger">MyFinancePal</Link>
+          <Link to="/" class="navbar-brand text-danger">
+            MyFinancePal
+          </Link>
           <button
             class="navbar-toggler"
             type="button"
@@ -23,7 +29,12 @@ function Navbar() {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <Link to="/" class="nav-link active" aria-current="page" href="#">
+                <Link
+                  to="/"
+                  class="nav-link active"
+                  aria-current="page"
+                  href="#"
+                >
                   Home
                 </Link>
               </li>
@@ -46,27 +57,36 @@ function Navbar() {
                   type="button"
                   data-bs-toggle="dropdown"
                 >
-                 <MdLanguage className="text-success" style={{"fontSize":"30px"}}/>
+                  <MdLanguage
+                    className="text-success"
+                    style={{ fontSize: "30px" }}
+                  />
                 </button>
                 <ul class="dropdown-menu">
-                  <li onClick={()=>i18n.changeLanguage('en')}>
-                    <a class="dropdown-item" >
-                      English
-                    </a>
+                  <li onClick={() => i18n.changeLanguage("en")}>
+                    <a class="dropdown-item">English</a>
                   </li>
-                  <li onClick={()=>i18n.changeLanguage('hb')}>
-                    <a class="dropdown-item">
-                      עברית
-                    </a>
+                  <li onClick={() => i18n.changeLanguage("hb")}>
+                    <a class="dropdown-item">עברית</a>
                   </li>
                 </ul>
               </div>
-              <Link to='/login' className="btn btn-outline-dark mx-1">
-                {t("LOGIN")}
-              </Link>
-              <Link to='/register' className="btn btn-outline-secondary">
-                {t("REGISTER")}
-              </Link>
+              {!user ? (
+                <>
+                  <Link to="/login" className="btn btn-outline-dark mx-1">
+                    {t("LOGIN")}
+                  </Link>
+                  <Link to="/register" className="btn btn-outline-secondary">
+                    {t("REGISTER")}
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link onClick={()=>{dispatch(logout())}} to="/login" className="btn btn-outline-secondary mx-1">
+                    {t("LOGOUT")}
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
