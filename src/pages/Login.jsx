@@ -1,7 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { login } from "../features/auth/authSlice";
+import { login, reset } from "../features/auth/authSlice";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
@@ -11,6 +13,28 @@ function Login() {
     password: "",
   });
   const { userName, password } = formData;
+  const navigate=useNavigate()
+  const {user,isAuthSuccess,isAuthError,isAuthLoading,authMessage}=useSelector(state=>state.auth)
+  useEffect(()=>{
+    if(isAuthSuccess&&user){
+      console.log("redux success", user)
+      navigate('/')
+    }
+    if(isAuthError){
+      toast.error(authMessage, {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+    dispatch(reset())
+  },[isAuthSuccess,isAuthError,user])
+
   const onChange = (e) => {
     e.preventDefault();
     setFormData((prev) => {
