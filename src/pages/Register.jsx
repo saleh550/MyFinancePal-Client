@@ -14,8 +14,9 @@ function Register() {
     userName: "",
     password: "",
     comfortPassword: "",
+    salary:""
   });
-  const { fullName, userName, password, comfortPassword } = formData;
+  const { fullName, userName, password, comfortPassword,salary } = formData;
 
   useEffect(()=>{
     if(isAuthSuccess&&user){
@@ -54,7 +55,7 @@ function Register() {
       <div className="container mt-5">
         <h1 className="my-3">{t("REGISTER")}</h1>
         <form onSubmit={onSubmit} class="row g-4">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label for="validationDefault01" class="form-label">
               {t("FULLNAME")}
             </label>
@@ -65,6 +66,20 @@ function Register() {
               id="validationDefault01"
               name="fullName"
               value={fullName}
+              required
+            />
+          </div>
+          <div class="col-md-1">
+            <label for="validationDefault01" class="form-label">
+              {t("SALARY")} ₪
+            </label>
+            <input
+              onChange={onChange}
+              type="number"
+              class="form-control"
+              id="validationDefault01"
+              name="salary"
+              value={salary}
               required
             />
           </div>

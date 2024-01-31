@@ -7,5 +7,7 @@
     "USERNAME":"User Name",
     "PASSWORD":"Password",
     "COMFORT_PASSWORD":"Comfort Password",
-    "LOGOUT":"Logout"
+    "LOGOUT":"Logout",
+    "SALARY":"Salary",
+    "GRAPH_1_DES":"Graph of expenses by categories"
 }

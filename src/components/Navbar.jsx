@@ -13,7 +13,7 @@ function Navbar() {
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <Link to="/" class="navbar-brand text-danger">
-            MyFinancePal
+            <strong>MyFinancePal</strong> 
           </Link>
           <button
             class="navbar-toggler"
