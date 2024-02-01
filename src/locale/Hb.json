@@ -9,7 +9,30 @@
     "COMFORT_PASSWORD":"סיסמה מאובטחת",
     "LOGOUT":"התנתק",
     "SALARY":"משכורת",
-    "GRAPH_1_DES":"גרף ההוצאות שלך לפי קטיגוריות"
+    "GRAPH_1_DES":"גרף ההוצאות שלך לפי קטיגוריות",
+    "GRAPH_2_DES":"גרף ההכנסות שלך לפי קטיגריות",
+    "iNCOME_MESSAGE_SUCCESS":"ההכנסה נשמרה בהצלחה",
+    "EXPENSE_MESSAGE_SUCCESS":"ההוצאה נשמרה בהצלחה",
+    "ERROR_MESSAGE_01":"משהו לא בסדר, נסה שוב מאוחר יותר",
+    "ADD_EXPENSE":"הוסף הוצאה",
+    "ADD_INCOME":"הוסף הכנסה",
+    "EXPENSE_NAME":"שם הוצאה",
+    "INCOME_NAME":"שם הוצאה",
+    "CATEGORY":"קטיגוריה",
+    "SELECT_AN_OPTION":"בחר אופציה",
+    "FOOD":"מזון",
+    "RESTAURANTS":"מסעדות",
+    "SHOPPING":"קניות",
+    "FUEL":"דלק",
+    "CIGARETTES":"סיגריות",
+    "WORK":"עבודה",
+    "DEPOSIT":"הפקדה",
+    "BANK_TRANSFER":"העברה בנקאית",
+    "OTHER":"אחר",
+    "DATE":"תאריך",
+    "AMOUNT":"סכום",
+    "SAVE":"שמור",
+    "CANCEL":"ביטול"
 
 
 

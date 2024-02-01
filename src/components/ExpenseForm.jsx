@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
+import { useDispatch , useSelector} from "react-redux";
+import { addNewExpense, expensesReset } from "../features/expenses/expensesSlice";
+import {toast} from 'react-toastify'
 function ExpenseForm() {
+  const dispatch =useDispatch();
+  const {isExpensesSuccess,isExpensesError,isExpensesLoading}=useSelector(state=>state.expenses)
+
   const [isDisable, setIsDisable] = useState(false);
   const { t } = useTranslation();
   const [formData, SetFormData] = useState({
@@ -11,6 +17,41 @@ function ExpenseForm() {
     amount: "",
   });
   const { name, category, date, amount } = formData;
+  useEffect(()=>{
+    if(isExpensesSuccess){
+      setIsDisable(false);
+      SetFormData({
+        name: "",
+        category: "",
+        date: "",
+        amount: "",
+      })
+      toast.success(t("iNCOME_MESSAGE_SUCCESS"), {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+    if(isExpensesError){
+      toast.error(t("ERROR_MESSAGE_01"), {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+    dispatch(expensesReset());
+  
+  },[isExpensesSuccess,isExpensesError])
   const onChange = (e) => {
     e.preventDefault();
     SetFormData((prevState) => {
@@ -22,7 +63,7 @@ function ExpenseForm() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("expense form ", formData);
+    dispatch(addNewExpense(formData));
   };
   const onCancel=(e)=>{
     e.preventDefault();
@@ -48,7 +89,8 @@ function ExpenseForm() {
         </div>
         {isDisable && (
           <>
-            <form onSubmit={onSubmit} className="row g-4 mt-2">
+          <div data-aos="fade-down">
+            <form   onSubmit={onSubmit} className="row g-4 mt-2">
               <div className="col-md-4">
                 <label for="validationDefaultUsername" class="form-label">
                   {t("EXPENSE_NAME")}
@@ -128,6 +170,7 @@ function ExpenseForm() {
                 </button>
               </div>
             </form>
+            </div>
           </>
         )}
       </div>

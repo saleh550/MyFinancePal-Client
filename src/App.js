@@ -6,6 +6,9 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { useTranslation } from "react-i18next";
 import Navbar from "./components/Navbar";
+import { useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -16,6 +19,9 @@ function App() {
   const switchLanguageHB = () => {
     i18n.changeLanguage("hb");
   };
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <>
       <Router>
