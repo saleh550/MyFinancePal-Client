@@ -28,3 +28,8 @@ code {
   border-radius: 50%;
   border: 10px solid rgb(169, 9, 243); 
 }
+.custom-tooltip{
+  background-color: rgb(255, 255, 255);
+  border:#04065f 2px solid;
+  padding: 5px;
+}

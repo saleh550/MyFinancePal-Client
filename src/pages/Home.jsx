@@ -11,6 +11,8 @@ import {
 } from "../features/expenses/expensesSlice";
 import { getIncomesData, incomesReset } from "../features/incomes/incomesSlice";
 import { toast } from "react-toastify";
+import { BsCalendar2Week } from "react-icons/bs";
+import { LuCircleDashed } from "react-icons/lu";
 const COLORS1 = [
   "#0088FE",
   "#00C49F",
@@ -89,7 +91,8 @@ function Home() {
     data01: [],
     data02: [],
   });
-  let key = Math.random();
+  const [expensesSwitch, setExpensesSwitch] = useState(false);
+  const [incomesSwitch, setIncomesSwitch] = useState(true);
 
   useEffect(() => {
     dispatch(getExpensesData());
@@ -155,20 +158,59 @@ function Home() {
         </>
       )}
       <div className="">
+        <button
+          onClick={() => setExpensesSwitch(true)}
+          className={
+            !expensesSwitch ? "btn btn-outline-dark m-1" : "btn btn-dark m-1"
+          }
+        >
+          <BsCalendar2Week className="display-5" />
+        </button>
+        <button
+          onClick={() => setExpensesSwitch(false)}
+          className={
+            expensesSwitch ? "btn btn-outline-dark m-1" : "btn btn-dark m-1"
+          }
+        >
+          <LuCircleDashed className="display-5" />
+        </button>
+
         <TwoLevelPieChart
+          switchGraph={expensesSwitch}
           data={expensesDataState}
           color="#ff2d55"
           COLORS={COLORS1}
           desc={"GRAPH_1_DES"}
+          dateColor="#ff2d55"
         />
         <ExpenseForm />
 
         <hr className="dotted-hr"></hr>
+
+        <button
+          onClick={() => setIncomesSwitch(true)}
+          className={
+            !incomesSwitch ? "btn btn-outline-dark m-1" : "btn btn-dark m-1"
+          }
+        >
+          <BsCalendar2Week className="display-5" />
+        </button>
+        <button
+          onClick={() => setIncomesSwitch(false)}
+          className={
+            incomesSwitch ? "btn btn-outline-dark m-1" : "btn btn-dark m-1"
+          }
+        >
+          <LuCircleDashed className="display-5" />
+        </button>
+
         <TwoLevelPieChart
+          switchGraph={incomesSwitch}
           data={incomesDataState}
           color="#34B335"
           COLORS={COLORS2}
           desc={"GRAPH_2_DES"}
+          dateColor={"#34B335"}
         />
         <IncomeForm />
         <hr className="dotted-hr"></hr>
