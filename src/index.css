@@ -23,8 +23,8 @@ code {
   margin:auto;
   /* max-width: 350px; */
   /* max-height: 350px; */
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   border: 10px solid rgb(169, 9, 243); 
 }

@@ -3,6 +3,7 @@ import incomesService from "./incomesService";
 
 const initialState = {
   newIncome:null,
+  incomesByDate:null,
   incomes: null,
   incomesData:null,
   isIncomesLoading: false,
@@ -50,6 +51,25 @@ export const getIncomesData = createAsyncThunk(
 );
 
 
+    //add new income 
+    export const getIncomesByDate = createAsyncThunk(
+      "incomes/by/date",
+      async (data, thunkAPI) => {
+        try {
+          const token = thunkAPI.getState().auth.user.token;
+          return await incomesService.getIncomesByDate(data,token);
+        } catch (error) {
+          const message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+          return thunkAPI.rejectWithValue(message);
+        }
+      }
+    );
+
   export const incomesSlice = createSlice({
     name: "incomes",
     initialState,
@@ -89,6 +109,19 @@ export const getIncomesData = createAsyncThunk(
           state.isIncomesLoading = false;
           state.isIncomesSuccess = true;
           state.incomesData=action.payload
+        })
+        .addCase(getIncomesByDate.pending, (state) => {
+          state.isIncomesLoading = true;
+        })
+        .addCase(getIncomesByDate.rejected, (state, action) => {
+          state.isIncomesLoading = false;
+          state.isIncomesError = true;
+          state.incomesMessage = action.payload;
+        })
+        .addCase(getIncomesByDate.fulfilled, (state, action) => {
+          state.isIncomesLoading = false;
+          state.isIncomesSuccess = true;
+          state.incomesByDate=action.payload
         })
         
     },

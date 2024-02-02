@@ -2,8 +2,9 @@ import { useState,useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { useDispatch , useSelector} from "react-redux";
-import { addNewExpense, expensesReset, getExpensesData } from "../features/expenses/expensesSlice";
+import { addNewExpense, expensesReset, getExpensesByDate, getExpensesData } from "../features/expenses/expensesSlice";
 import {toast} from 'react-toastify'
+import { getIncomesByDate } from "../features/incomes/incomesSlice";
 function ExpenseForm() {
   const dispatch =useDispatch();
   const {isExpensesSuccess,isExpensesError,isExpensesLoading ,newExpense}=useSelector(state=>state.expenses)
@@ -36,7 +37,8 @@ function ExpenseForm() {
         progress: undefined,
         theme: "dark",
       });
-      dispatch(getExpensesData())
+      dispatch(getExpensesData()) 
+      dispatch(getExpensesByDate())
     }
     if(isExpensesError){
       toast.error(t("ERROR_MESSAGE_01"), {
@@ -51,6 +53,7 @@ function ExpenseForm() {
       });
     }
     dispatch(expensesReset());
+    dispatch(getIncomesByDate())
   
   },[isExpensesSuccess,isExpensesError])
   const onChange = (e) => {

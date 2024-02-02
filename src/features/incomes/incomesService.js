@@ -30,8 +30,24 @@ try {
   throw new Error(error);
 }
 };
+
+//get incomes by date
+const getIncomesByDate = async (Data, token) => {
+  const config = {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await axios.get(`${API_URL}/get/incomes/by/date`, config);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 const incomesService = {
     addNewIncome,
-    getIncomesData
+    getIncomesData,
+    getIncomesByDate
 };
 export default incomesService;

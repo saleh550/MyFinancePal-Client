@@ -7,9 +7,10 @@ import IncomeForm from "../components/IncomeForm";
 import { useEffect, useState } from "react";
 import {
   expensesReset,
+  getExpensesByDate,
   getExpensesData,
 } from "../features/expenses/expensesSlice";
-import { getIncomesData, incomesReset } from "../features/incomes/incomesSlice";
+import { getIncomesByDate, getIncomesData, incomesReset } from "../features/incomes/incomesSlice";
 import { toast } from "react-toastify";
 import { BsCalendar2Week } from "react-icons/bs";
 import { LuCircleDashed } from "react-icons/lu";
@@ -78,18 +79,20 @@ const COLORS2 = [
 function Home() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const { isExpensesError, isExpensesSuccess, expensesData, expensesMessage } =
+  const { isExpensesError, isExpensesSuccess, expensesData, expensesMessage,expensesByDate } =
     useSelector((state) => state.expenses);
-  const { isIncomesError, isIncomesSuccess, incomesData, incomesMessage } =
+  const { isIncomesError, isIncomesSuccess, incomesData, incomesMessage,incomesByDate } =
     useSelector((state) => state.incomes);
   const { t } = useTranslation();
   const [expensesDataState, setExpensesDataState] = useState({
     data01: [],
     data02: [],
+    dataByDate:[]
   });
   const [incomesDataState, setIncomesDataState] = useState({
     data01: [],
     data02: [],
+    dataByDate:[]
   });
   const [expensesSwitch, setExpensesSwitch] = useState(false);
   const [incomesSwitch, setIncomesSwitch] = useState(true);
@@ -97,6 +100,8 @@ function Home() {
   useEffect(() => {
     dispatch(getExpensesData());
     dispatch(getIncomesData());
+    dispatch(getExpensesByDate());
+    dispatch(getIncomesByDate());
   }, []);
   useEffect(() => {
     if (expensesData) {
@@ -105,6 +110,7 @@ function Home() {
           ...prevState,
           data01: expensesData.categories,
           data02: expensesData.expenses,
+          dataByDate:expensesByDate
         };
       });
     }
@@ -130,6 +136,7 @@ function Home() {
           ...prevState,
           data01: incomesData.categories,
           data02: incomesData.incomes,
+          dataByDate:incomesByDate
         };
       });
     }

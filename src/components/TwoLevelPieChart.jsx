@@ -83,7 +83,7 @@ function TwoLevelPieChart({switchGraph, data, color, COLORS, desc,dateColor }) {
                 <AreaChart
                   width={350}
                   height={300}
-                  data={datax}
+                  data={data.dataByDate}
                   margin={{
                     top: 10,
                     bottom: 0,

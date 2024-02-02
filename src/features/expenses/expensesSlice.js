@@ -3,6 +3,7 @@ import expenseService from "./expensesService";
 
 const initialState = {
   newExpense:null,
+  expensesByDate:null,
   expenses: null,
   expensesData:null,
   isExpensesLoading: false,
@@ -49,6 +50,25 @@ export const getExpensesData = createAsyncThunk(
   }
 );
 
+  //add new income 
+  export const getExpensesByDate = createAsyncThunk(
+    "expenses/by/date",
+    async (data, thunkAPI) => {
+      try {
+        const token = thunkAPI.getState().auth.user.token;
+        return await expenseService.getExpensesByDate(data,token);
+      } catch (error) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        return thunkAPI.rejectWithValue(message);
+      }
+    }
+  );
+
 
   export const expensesSlice = createSlice({
     name: "expenses",
@@ -89,6 +109,19 @@ export const getExpensesData = createAsyncThunk(
           state.isExpensesLoading = false;
           state.isExpensesSuccess = true;
           state.expensesData=action.payload;
+        })
+        .addCase(getExpensesByDate.pending, (state) => {
+          state.isExpensesLoading = true;
+        })
+        .addCase(getExpensesByDate.rejected, (state, action) => {
+          state.isExpensesLoading = false;
+          state.isExpensesError = true;
+          state.expensesMessage = action.payload;
+        })
+        .addCase(getExpensesByDate.fulfilled, (state, action) => {
+          state.isExpensesLoading = false;
+          state.isExpensesSuccess = true;
+          state.expensesByDate=action.payload;
         })
         
     },

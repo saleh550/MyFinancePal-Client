@@ -1,5 +1,6 @@
 {
     "TEST":"test",
+    "NAME":"Name",
     "LOGIN":"Login",
     "REGISTER":"Register",
     "LOGINING":"Login",
