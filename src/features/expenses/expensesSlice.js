@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import expenseService from "./expensesService";
 
 const initialState = {
+  expensesAndIncomes:null,
   newExpense:null,
   expensesByDate:null,
   expenses: null,
@@ -70,6 +71,25 @@ export const getExpensesData = createAsyncThunk(
   );
 
 
+    //add new income 
+    export const getExpensesAndIncomes = createAsyncThunk(
+      "expenses/and/incomes",
+      async (data, thunkAPI) => {
+        try {
+          const token = thunkAPI.getState().auth.user.token;
+          return await expenseService.getExpensesAndIncomes(data,token);
+        } catch (error) {
+          const message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+          return thunkAPI.rejectWithValue(message);
+        }
+      }
+    );
+
   export const expensesSlice = createSlice({
     name: "expenses",
     initialState,
@@ -122,6 +142,19 @@ export const getExpensesData = createAsyncThunk(
           state.isExpensesLoading = false;
           state.isExpensesSuccess = true;
           state.expensesByDate=action.payload;
+        })
+        .addCase(getExpensesAndIncomes.pending, (state) => {
+          state.isExpensesLoading = true;
+        })
+        .addCase(getExpensesAndIncomes.rejected, (state, action) => {
+          state.isExpensesLoading = false;
+          state.isExpensesError = true;
+          state.expensesMessage = action.payload;
+        })
+        .addCase(getExpensesAndIncomes.fulfilled, (state, action) => {
+          state.isExpensesLoading = false;
+          state.isExpensesSuccess = true;
+          state.expensesAndIncomes=action.payload;
         })
         
     },

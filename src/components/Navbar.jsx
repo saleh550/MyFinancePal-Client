@@ -28,14 +28,24 @@ function Navbar() {
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
+            <li class="nav-item">
                 <Link
                   to="/"
                   class="nav-link active"
                   aria-current="page"
                   href="#"
                 >
-                  Home
+                  {t("HOME")}
+                </Link>
+              </li>
+              <li class="nav-item">
+                <Link
+                  to="/balance"
+                  class="nav-link active"
+                  aria-current="page"
+                  href="#"
+                >
+                  {t("BALANCE")}
                 </Link>
               </li>
               {/* <li class="nav-item">

@@ -46,9 +46,26 @@ const getExpensesByDate = async (Data, token) => {
     throw new Error(error);
   }
 };
+
+
+//get all of expenses and incomes
+const getExpensesAndIncomes = async (Data, token) => {
+  const config = {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await axios.get(`${API_URL}/get/expenses/and/incomes`, config);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 const expenseService = {
   addNewExpense,
   getExpenseData,
-  getExpensesByDate
+  getExpensesByDate,
+  getExpensesAndIncomes
 };
 export default expenseService;

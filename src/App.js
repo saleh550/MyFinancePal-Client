@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import { useEffect } from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Balance from "./pages/Balance";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -31,6 +32,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/balance" element={<Balance />} />
           </Routes>
 
         </div>
