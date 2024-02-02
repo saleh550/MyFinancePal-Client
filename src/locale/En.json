@@ -32,5 +32,6 @@
     "DATE":"Date",
     "AMOUNT":"Amount",
     "SAVE":"Save",
-    "CANCEL":"Cancel"
+    "CANCEL":"Cancel",
+    "NO_ENOUGH_DATA_MESSAGE":"There is not enough data to display the graph, add expenses and incomes to flood the graph"
 }

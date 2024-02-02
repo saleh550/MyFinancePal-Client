@@ -16,3 +16,15 @@ code {
   border-top: 12px dotted #8c8b8b;
   width: 200px;
 }
+.no-data-circle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:auto;
+  /* max-width: 350px; */
+  /* max-height: 350px; */
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 10px solid rgb(169, 9, 243); 
+}

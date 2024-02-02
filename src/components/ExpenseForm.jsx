@@ -2,11 +2,11 @@ import { useState,useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { useDispatch , useSelector} from "react-redux";
-import { addNewExpense, expensesReset } from "../features/expenses/expensesSlice";
+import { addNewExpense, expensesReset, getExpensesData } from "../features/expenses/expensesSlice";
 import {toast} from 'react-toastify'
 function ExpenseForm() {
   const dispatch =useDispatch();
-  const {isExpensesSuccess,isExpensesError,isExpensesLoading}=useSelector(state=>state.expenses)
+  const {isExpensesSuccess,isExpensesError,isExpensesLoading ,newExpense}=useSelector(state=>state.expenses)
 
   const [isDisable, setIsDisable] = useState(false);
   const { t } = useTranslation();
@@ -18,7 +18,7 @@ function ExpenseForm() {
   });
   const { name, category, date, amount } = formData;
   useEffect(()=>{
-    if(isExpensesSuccess){
+    if(isExpensesSuccess&&newExpense){
       setIsDisable(false);
       SetFormData({
         name: "",
@@ -26,7 +26,7 @@ function ExpenseForm() {
         date: "",
         amount: "",
       })
-      toast.success(t("iNCOME_MESSAGE_SUCCESS"), {
+      toast.success(t("EXPENSE_MESSAGE_SUCCESS"), {
         position: "bottom-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -36,6 +36,7 @@ function ExpenseForm() {
         progress: undefined,
         theme: "dark",
       });
+      dispatch(getExpensesData())
     }
     if(isExpensesError){
       toast.error(t("ERROR_MESSAGE_01"), {
