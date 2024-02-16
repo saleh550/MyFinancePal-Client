@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = "/api/incomes";
+// const API_URL = "/api/incomes";
+const API_URL = "https://myfinancepal-server.onrender.com/api/incomes";
 
 //add new income
 const addNewIncome = async (Data,token) => {
